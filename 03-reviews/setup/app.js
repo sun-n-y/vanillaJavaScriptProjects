@@ -29,56 +29,60 @@ const reviews = [
     text: 'Edison bulb put a bird on it humblebrag, marfa pok pok heirloom fashion axe cray stumptown venmo actually seitan. VHS farm-to-table schlitz, edison bulb pop-up 3 wolf moon tote bag street art shabby chic. ',
   },
 ];
-// select items
+
+//target all the elements that will change dynaimcally
 const img = document.getElementById('person-img');
 const author = document.getElementById('author');
 const job = document.getElementById('job');
 const info = document.getElementById('info');
 
+//and the buttons
 const prevBtn = document.querySelector('.prev-btn');
 const nextBtn = document.querySelector('.next-btn');
 const randomBtn = document.querySelector('.random-btn');
 
-// set starting item
+//set intial starting value 0, cause of array 4 items in array
 let currentItem = 0;
 
-// load initial item
+//once document loads, show item 1 from the array
+//load intial item, listen for dom content loaded on window
 window.addEventListener('DOMContentLoaded', function () {
-  const item = reviews[currentItem];
-  img.src = item.img;
-  author.textContent = item.name;
-  job.textContent = item.job;
-  info.textContent = item.text;
+  showPerson(currentItem);
 });
 
-// show person based on item
+//show person based on item function
 function showPerson(person) {
+  //aiisgn item to variable
   const item = reviews[person];
   img.src = item.img;
   author.textContent = item.name;
   job.textContent = item.job;
   info.textContent = item.text;
 }
-// show next person
+
+//once prev and next button is pressed item changes
 nextBtn.addEventListener('click', function () {
   currentItem++;
+  //range logic for current items
   if (currentItem > reviews.length - 1) {
     currentItem = 0;
   }
   showPerson(currentItem);
 });
-// show prev person
 prevBtn.addEventListener('click', function () {
   currentItem--;
+  //range logic for current items
   if (currentItem < 0) {
     currentItem = reviews.length - 1;
   }
   showPerson(currentItem);
 });
-// show random person
-randomBtn.addEventListener('click', function () {
-  console.log('hello');
 
-  currentItem = Math.floor(Math.random() * reviews.length);
-  showPerson(currentItem);
+//get random item from review array when btn is clicked
+function randomNumber() {
+  return Math.floor(Math.random() * reviews.length);
+}
+
+randomBtn.addEventListener('click', function () {
+  showPerson(randomNumber());
 });
