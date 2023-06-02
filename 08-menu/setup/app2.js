@@ -84,11 +84,12 @@ const menu = [
 
 //target elements=================================================
 const sectionCenter = document.querySelector('.section-center');
-const btns = document.querySelectorAll('.filter-btn');
+const btnContainer = document.querySelector('.btn-container');
 
-//event listners==================================================
+//event listners - to load items =================================
 window.addEventListener('DOMContentLoaded', function () {
   showMenu(menu);
+  displayBtns();
 });
 
 //refactor functions==============================================
@@ -108,20 +109,39 @@ function showMenu(menuItems) {
   menuArray = menuArray.join('');
   sectionCenter.innerHTML = menuArray;
 }
-//================================================================
-btns.forEach(function (btn) {
-  btn.addEventListener('click', function (e) {
-    const category = e.currentTarget.dataset.id;
-    const filteredArray = menu.filter(function (item) {
-      if (category === item.category) {
-        return item;
+
+function displayBtns() {
+  const categories = menu.reduce(
+    function (values, item) {
+      if (!values.includes(item.category)) {
+        values.push(item.category);
+      }
+      return values;
+    },
+    ['all']
+  );
+  const categoryBtns = categories
+    .map(function (category) {
+      return `<button class="filter-btn" data-id="${category}" type="button">${category}</button>`;
+    })
+    .join('');
+  btnContainer.innerHTML = categoryBtns;
+
+  const btns = document.querySelectorAll('.filter-btn');
+
+  btns.forEach(function (btn) {
+    btn.addEventListener('click', function (e) {
+      const category = e.currentTarget.dataset.id;
+      const filteredArray = menu.filter(function (item) {
+        if (category === item.category) {
+          return item;
+        }
+      });
+      if (category === 'all') {
+        showMenu(menu);
+      } else {
+        showMenu(filteredArray);
       }
     });
-    if (category === 'all') {
-      showMenu(menu);
-    } else {
-      showMenu(filteredArray);
-    }
   });
-});
-//================================================================
+}
