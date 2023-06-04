@@ -57,5 +57,10 @@ scrollLinks.forEach(function (scrollLink) {
       let pixelLocation = element.offsetTop - 164;
       window.scrollTo({ left: 0, top: pixelLocation });
     }
+    if (nav.getBoundingClientRect().height > 82) {
+      let pixelLocation =
+        element.offsetTop - 82 - nav.getBoundingClientRect().height;
+      window.scrollTo({ left: 0, top: pixelLocation });
+    }
   });
 });
