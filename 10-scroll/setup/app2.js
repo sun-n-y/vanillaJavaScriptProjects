@@ -38,3 +38,20 @@ window.addEventListener('scroll', function () {
 });
 
 // ********** smooth scroll ************
+const scrollLinks = document.querySelectorAll('.scroll-link');
+
+scrollLinks.forEach(function (scrollLink) {
+  scrollLink.addEventListener('click', function (e) {
+    e.preventDefault();
+    const attribute = e.currentTarget.getAttribute('href').slice(1);
+    const element = document.getElementById(attribute);
+    if (nav.classList.contains('fixed-nav')) {
+      let pixelLocation = element.offsetTop - 82;
+      window.scrollTo({ left: 0, top: pixelLocation });
+    }
+    if (!nav.classList.contains('fixed-nav')) {
+      let pixelLocation = element.offsetTop - 164;
+      window.scrollTo({ left: 0, top: pixelLocation });
+    }
+  });
+});
