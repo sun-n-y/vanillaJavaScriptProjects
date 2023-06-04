@@ -17,8 +17,6 @@ const links = document.querySelector('.links');
 navToggle.addEventListener('click', function () {
   const linksContainerHeight = linksContainer.getBoundingClientRect().height;
   const linksHeight = links.getBoundingClientRect().height;
-  console.log(linksHeight);
-  console.log(linksContainerHeight);
 
   if (linksContainerHeight == 0) {
     linksContainer.style.height = `${linksHeight}px`;
@@ -28,6 +26,7 @@ navToggle.addEventListener('click', function () {
 });
 
 // ********** fixed navbar ************
+
 const nav = document.querySelector('#nav');
 
 window.addEventListener('scroll', function () {
