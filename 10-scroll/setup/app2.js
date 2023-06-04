@@ -28,12 +28,15 @@ navToggle.addEventListener('click', function () {
 // ********** fixed navbar ************
 
 const nav = document.querySelector('#nav');
+const topBtn = document.querySelector('.top-link');
 
 window.addEventListener('scroll', function () {
   if (scrollY > 80) {
     nav.classList.add('fixed-nav');
+    topBtn.classList.add('show-link');
   } else {
     nav.classList.remove('fixed-nav');
+    topBtn.classList.remove('show-link');
   }
 });
 
