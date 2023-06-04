@@ -28,4 +28,14 @@ navToggle.addEventListener('click', function () {
 });
 
 // ********** fixed navbar ************
+const nav = document.querySelector('#nav');
+
+window.addEventListener('scroll', function () {
+  if (scrollY > 80) {
+    nav.classList.add('fixed-nav');
+  } else {
+    nav.classList.remove('fixed-nav');
+  }
+});
+
 // ********** smooth scroll ************
