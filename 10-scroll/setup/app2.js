@@ -48,19 +48,18 @@ scrollLinks.forEach(function (scrollLink) {
     e.preventDefault();
     const attribute = e.currentTarget.getAttribute('href').slice(1);
     const element = document.getElementById(attribute);
+    const navHeight = nav.getBoundingClientRect().height;
+    const containerHeight = linksContainer.getBoundingClientRect().height;
+    const fixedNav = nav.classList.contains('fixed-nav');
+    let position = element.offsetTop - navHeight;
+
     linksContainer.style.height = 0;
-    if (nav.classList.contains('fixed-nav')) {
-      let pixelLocation = element.offsetTop - 82;
-      window.scrollTo({ left: 0, top: pixelLocation });
+    if (!fixedNav) {
+      position = position - navHeight;
     }
-    if (!nav.classList.contains('fixed-nav')) {
-      let pixelLocation = element.offsetTop - 164;
-      window.scrollTo({ left: 0, top: pixelLocation });
+    if (navHeight > 82) {
+      position = position + containerHeight;
     }
-    if (nav.getBoundingClientRect().height > 82) {
-      let pixelLocation =
-        element.offsetTop - 82 - nav.getBoundingClientRect().height;
-      window.scrollTo({ left: 0, top: pixelLocation });
-    }
+    window.scrollTo({ left: 0, top: position });
   });
 });
