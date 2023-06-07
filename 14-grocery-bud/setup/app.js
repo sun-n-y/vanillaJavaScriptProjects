@@ -24,7 +24,34 @@ function addItem(e) {
   const value = grocery.value;
   const id = new Date().getTime().toString();
   if (value && !editFLag) {
-    console.log('add item to the list');
+    //add element
+    const element = document.createElement('article');
+    //add class to element
+    element.classList.add('grocery-item');
+    //add attribute element
+    const attr = document.createAttribute('data-id');
+    attr.value = id;
+    element.setAttributeNode(attr);
+    //add html to element
+    element.innerHTML = `<p class="title">${value}</p>
+          <div class="btn-container">
+            <button type="button" class="edit-btn">
+              <i class="fas fa-edit"></i>
+            </button>
+            <button type="button" class="delete-btn">
+              <i class="fas fa-trash"></i>
+            </button>
+          </div>`;
+    //append child to list
+    list.appendChild(element);
+    //display alert
+    displayAlert('item added to list', 'success');
+    //show contianer
+    container.classList.add('show-container');
+    //add to local storage
+    addToLocalStorage(id, value);
+    //set back to default
+    setBackToDefault();
   } else if (value && editFLag) {
     console.log('editing');
   } else {
@@ -43,6 +70,15 @@ function displayAlert(text, action) {
   }, 1000);
 }
 
+//set back to default
+function setBackToDefault() {
+  console.log('back to default');
+}
+
 // ****** LOCAL STORAGE **********
+
+function addToLocalStorage(id, value) {
+  console.log('added to local storage');
+}
 
 // ****** SETUP ITEMS **********
